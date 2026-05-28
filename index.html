@@ -3,125 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App HSE y Emociones</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>EntreNos - Bienestar Emocional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --fondo-app: #fdfbf7;
-            --pastel-rojo: #ffb7b2;
-            --pastel-amarillo: #ffe4b5;
-            --pastel-azul: #d0e8f2;
-            --pastel-morado: #e2d1f9;
-            --pastel-verde: #a8d5ba;
-            --texto-oscuro: #4a4a4a;
-            --azul-fuerte: #3498db;
+            /* Paleta estilo Instagram */
+            --ig-grad: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --ig-bg: #fafafa;
+            --ig-border: #dbdbdb;
+            --ig-text: #262626;
+            --ig-blue: #0095f6;
+            --ig-light: #efefef;
         }
 
         body {
             margin: 0; display: flex; justify-content: center; align-items: center;
-            height: 100vh; background-color: #e9ecef; font-family: 'Quicksand', sans-serif;
-            color: var(--texto-oscuro);
+            height: 100vh; background-color: #e9ecef; font-family: 'Inter', sans-serif;
+            color: var(--ig-text);
         }
 
         .app-mobile {
-            width: 360px; height: 700px; background-color: var(--fondo-app);
-            border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            width: 380px; height: 750px; background-color: white;
+            border-radius: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.1);
             overflow: hidden; position: relative; display: flex; flex-direction: column;
+            border: 8px solid #000; /* Simula el marco del celular */
+        }
+
+        .header-app {
+            text-align: center; padding: 20px 10px 10px; border-bottom: 1px solid var(--ig-border);
+        }
+
+        .titulo-app {
+            font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 800; margin: 0;
+            background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .pantalla {
-            display: none; padding: 30px 20px; height: 100%; box-sizing: border-box;
+            display: none; padding: 25px 20px; height: 100%; box-sizing: border-box;
             flex-direction: column; align-items: center; text-align: center;
-            animation: fadeIn 0.4s ease-in-out; overflow-y: auto;
+            animation: fadeIn 0.3s ease-in-out; overflow-y: auto;
         }
-
         .pantalla.activa { display: flex; }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
-        h1 { font-size: 22px; margin-bottom: 5px; color: #2c3e50; }
-        h2 { font-size: 18px; color: #34495e; margin-bottom: 15px;}
-        p { font-size: 14px; margin-bottom: 20px; line-height: 1.4; }
+        h2 { font-size: 18px; margin-bottom: 15px; font-weight: 600; color: var(--ig-text); }
+        p { font-size: 14px; margin-bottom: 20px; line-height: 1.5; color: #555; }
 
         .btn-principal {
-            background-color: var(--pastel-verde); color: #2c3e50; border: none;
-            padding: 15px 20px; border-radius: 30px; font-size: 15px; font-weight: 700;
-            cursor: pointer; width: 90%; margin-top: 10px; transition: 0.3s; flex-shrink: 0;
+            background: var(--ig-grad); color: white; border: none;
+            padding: 16px 20px; border-radius: 25px; font-size: 15px; font-weight: 600;
+            cursor: pointer; width: 100%; margin-top: 10px; transition: 0.2s; box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3);
         }
-        .btn-secundario { background-color: #e0e0e0; }
-        .btn-menu { background-color: var(--pastel-azul); padding: 25px; margin-bottom: 20px; border-radius: 20px; border: 3px solid #b9d8e6; font-size: 16px;}
+        .btn-principal:active { transform: scale(0.97); }
+        
+        .btn-secundario {
+            background: white; color: var(--ig-text); border: 1px solid var(--ig-border);
+            box-shadow: none;
+        }
+        
+        .btn-opcion {
+            background: white; border: 1px solid var(--ig-border); border-radius: 15px;
+            padding: 15px; font-size: 14px; font-weight: 600; color: var(--ig-text);
+            cursor: pointer; transition: 0.2s; width: 100%; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .btn-opcion:hover { border-color: #cc2366; color: #cc2366; }
 
         /* --- FORMULARIO HSE --- */
-        .grupo-form { text-align: left; width: 100%; margin-bottom: 15px; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); box-sizing: border-box;}
-        label { font-weight: bold; font-size: 13px; display: block; margin-bottom: 5px; color: #2c3e50;}
-        select, input[type="number"] { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; font-family: 'Quicksand'; box-sizing: border-box; margin-bottom: 10px;}
-        .item-pregunta { font-size: 13px; margin-bottom: 8px; font-weight: 600;}
+        .grupo-form { text-align: left; width: 100%; margin-bottom: 20px; background: var(--ig-bg); padding: 15px; border-radius: 15px; border: 1px solid var(--ig-border); box-sizing: border-box;}
+        label { font-weight: 600; font-size: 13px; display: block; margin-bottom: 8px; color: var(--ig-text);}
+        select, input[type="number"] { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--ig-border); font-family: 'Inter'; box-sizing: border-box; margin-bottom: 10px; background: white; outline: none;}
+        select:focus, input:focus { border-color: var(--ig-blue); }
+        .item-pregunta { font-size: 13px; margin-bottom: 10px; font-weight: 600; color: var(--ig-text);}
         
-        /* --- BOTONES EMOCIONES --- */
-        .grid-emociones { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; margin-bottom: 15px; }
-        .btn-señal {
-            background-color: white; border: 3px solid #e0e0e0; border-radius: 20px;
-            padding: 10px; font-size: 13px; font-family: 'Quicksand', sans-serif; font-weight: bold;
-            cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 5px;
-        }
-        .btn-señal.furia { border-bottom-color: var(--pastel-rojo); }
-        .btn-señal.sorpresa { border-bottom-color: var(--pastel-amarillo); }
-        .btn-señal.tristeza { border-bottom-color: var(--pastel-azul); }
-        .btn-señal.asco { border-bottom-color: var(--pastel-morado); }
-        .btn-señal.felicidad { border-bottom-color: var(--pastel-verde); }
-        .emoji-grande { font-size: 30px; margin-bottom: 5px;}
-
         /* --- TARJETAS --- */
-        .tarjeta { background: white; width: 100%; padding: 15px; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; box-sizing: border-box; font-size: 13px;}
-        .tarjeta-resultado { border-left: 5px solid; margin-bottom: 10px; }
+        .tarjeta { background: white; width: 100%; padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 1px solid var(--ig-border); text-align: left; box-sizing: border-box; font-size: 13.5px;}
+        .etiqueta-nivel { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 800; color: white; margin-bottom: 8px;}
+        .bg-alto { background: #2ecc71; } .bg-medio { background: #f1c40f; color: #000; } .bg-bajo { background: #e74c3c; }
 
-        /* --- RESPIRACIÓN --- */
-        .caja-respiracion {
-            width: 140px; height: 140px; border: 8px solid var(--pastel-verde);
-            border-radius: 50%; position: relative; margin: 20px auto;
-            display: flex; justify-content: center; align-items: center; background-color: white; 
-            animation: respirar 16s infinite;
-        }
-        @keyframes respirar {
-            0% { transform: scale(1); background-color: white; }
-            25% { transform: scale(1.3); background-color: var(--pastel-verde); }
-            50% { transform: scale(1.3); background-color: var(--pastel-verde); }
-            100% { transform: scale(1); background-color: white; }
-        }
+        /* --- ANIMACIONES TÉCNICAS --- */
+        .contenedor-animacion { width: 150px; height: 150px; margin: 20px auto; display: flex; justify-content: center; align-items: center; }
+        
+        /* Respiración 4-4-8 */
+        .circulo-respirar { width: 80px; height: 80px; border-radius: 50%; background: var(--ig-grad); animation: respiracion 16s infinite; }
+        @keyframes respiracion { 0% { transform: scale(1); opacity: 0.5; } 25% { transform: scale(1.8); opacity: 1; } 50% { transform: scale(1.8); opacity: 1; } 100% { transform: scale(1); opacity: 0.5; } }
+        
+        /* Shaking (Descarga somática) */
+        .icono-shaking { font-size: 60px; animation: shaking 0.5s infinite; }
+        @keyframes shaking { 0% { transform: translateX(0) rotate(0); } 25% { transform: translateX(-5px) rotate(-10deg); } 50% { transform: translateX(5px) rotate(10deg); } 75% { transform: translateX(-5px) rotate(-10deg); } 100% { transform: translateX(0) rotate(0); } }
+
+        /* Pausa / Reloj */
+        .icono-pausa { font-size: 60px; animation: pausa 4s infinite linear; }
+        @keyframes pausa { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* Anclaje / Pulso */
+        .icono-anclaje { font-size: 60px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+
+        .footer-autor { text-align: center; font-size: 11px; color: #999; margin-top: auto; padding-top: 15px; font-weight: 600; }
     </style>
 </head>
 <body>
 
 <div class="app-mobile">
+    <div class="header-app">
+        <h1 class="titulo-app">EntreNos</h1>
+    </div>
 
     <div id="pantalla-inicio" class="pantalla activa">
-        <div style="font-size: 60px; margin-bottom: 10px;">🧭</div>
-        <h1>GPS Emocional</h1>
-        <p>Bienvenido. Elige la ruta que deseas tomar hoy:</p>
+        <div style="font-size: 70px; margin: 20px 0;">✨</div>
+        <h2>Explora tu interior</h2>
+        <p>¿Qué camino deseas recorrer hoy?</p>
         
-        <button class="btn-principal btn-menu" onclick="navegar('pantalla-hse')">
-            <span style="font-size: 24px; display: block; margin-bottom: 5px;">📊</span>
-            1. Evaluar mis Habilidades Socioemocionales
+        <button class="btn-principal" onclick="navegar('pantalla-hse')">
+            📊 Evaluar mis Habilidades (HSE)
         </button>
-        <button class="btn-principal btn-menu" onclick="navegar('pantalla-emociones')" style="background-color: var(--pastel-amarillo); border-color: #f6d365;">
-            <span style="font-size: 24px; display: block; margin-bottom: 5px;">❤️</span>
-            2. ¿Cómo me siento hoy?
+        <button class="btn-principal btn-secundario" onclick="iniciarSeccionEmociones()" style="margin-top: 20px; border-color: #cc2366; color: #cc2366;">
+            ❤️ ¿Cómo me siento hoy?
         </button>
+        
+        <div class="footer-autor">Design by Iván Bravo</div>
     </div>
 
     <div id="pantalla-hse" class="pantalla">
-        <h1>Sección 1</h1>
-        <h2>Evaluación Socioemocional</h2>
-        <p style="font-size: 12px; text-align: justify;"><em>Lee detenidamente cada afirmación y selecciona la opción que mejor describa tu comportamiento. No hay respuestas correctas o incorrectas.</em></p>
+        <h2>Sección 1: Escala HSE</h2>
+        <p style="font-size: 12px; text-align: justify;"><em>Lee detenidamente cada afirmación y selecciona la opción que mejor describa tu comportamiento. Responde con sinceridad.</em></p>
         
         <form id="formulario-hse" style="width: 100%;">
-            
-            <div class="grupo-form" style="background-color: var(--pastel-amarillo); border: 2px solid #f6d365;">
-                <label style="display: flex; align-items: center; gap: 10px; font-size: 12px; cursor: pointer;">
-                    <input type="checkbox" name="acepto" value="Acepto" required style="width: 20px; height: 20px;"> 
+            <div class="grupo-form" style="border-left: 4px solid var(--ig-blue);">
+                <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 12px; cursor: pointer; font-weight: 400;">
+                    <input type="checkbox" name="acepto" value="Acepto" required style="width: 25px; height: 25px; margin: 0;"> 
                     Acepto participar en esta evaluación y autorizo el uso de mis respuestas con fines educativos y de convivencia escolar.
                 </label>
             </div>
@@ -130,71 +144,123 @@
                 <label>Datos Sociodemográficos y Laborales</label>
                 <select name="genero" required><option value="">Género...</option><option value="Femenino">Femenino</option><option value="Masculino">Masculino</option><option value="No binario">No binario</option><option value="Prefiero no decirlo">Prefiero no decirlo</option></select>
                 <select name="sexo" required><option value="">Sexo...</option><option value="Femenino">Femenino</option><option value="Masculino">Masculino</option><option value="Intersexual">Intersexual</option></select>
-                <input type="number" name="edad" min="10" max="99" placeholder="Edad (en números)" required>
+                <input type="number" name="edad" min="10" max="99" placeholder="Edad en números" required>
                 <select name="sede" required><option value="">Sede del Colegio...</option><option value="Sede A">Sede A</option><option value="Sede B">Sede B</option><option value="Sede C">Sede C</option></select>
                 <select name="jornada" required><option value="">Jornada escolar...</option><option value="Mañana">Mañana</option><option value="Tarde">Tarde</option><option value="Única">Única</option><option value="Nocturna">Nocturna</option></select>
-                <select name="nivel_educativo" required><option value="">Nivel educativo principal...</option><option value="Preescolar">Preescolar</option><option value="Primaria">Primaria</option><option value="Secundaria">Secundaria</option><option value="Media">Media</option></select>
+                <select name="nivel_educativo" required><option value="">Nivel educativo...</option><option value="Preescolar">Preescolar</option><option value="Primaria">Primaria</option><option value="Secundaria">Secundaria</option><option value="Media">Media</option></select>
                 <select name="area_desempeno" required><option value="">Área de desempeño...</option><option value="Matemáticas">Matemáticas</option><option value="Humanidades y Lengua Castellana">Humanidades y Lengua Castellana</option><option value="Idiomas Extranjeros">Idiomas Extranjeros</option><option value="Ciencias Naturales">Ciencias Naturales</option><option value="Ciencias Sociales">Ciencias Sociales</option><option value="Educación Física">Educación Física</option><option value="Educación Artística">Educación Artística</option><option value="Tecnología e Informática">Tecnología e Informática</option><option value="Ética y Valores">Ética y Valores</option><option value="Religión">Religión</option><option value="Filosofía">Filosofía</option><option value="Otra">Otra área</option></select>
             </div>
 
             <div id="contenedor-items-hse"></div>
 
-            <button type="submit" class="btn-principal" id="btn-enviar-hse">Enviar y Ver Resultados</button>
-            <button type="button" class="btn-principal btn-secundario" onclick="navegar('pantalla-inicio')">Cancelar</button>
+            <button type="submit" class="btn-principal" id="btn-enviar-hse">Enviar y Calcular</button>
+            <button type="button" class="btn-principal btn-secundario" onclick="navegar('pantalla-inicio')">Volver</button>
+            <div class="footer-autor" style="margin-top: 20px;">Design by Iván Bravo</div>
         </form>
     </div>
 
     <div id="pantalla-resultados-hse" class="pantalla">
-        <h1>Tu Perfil HSE</h1>
-        <p style="font-size: 12px;" id="mensaje-exito"></p>
+        <h2>Tu Perfil Socioemocional</h2>
         <div id="contenido-resultados" style="width: 100%; text-align: left; flex-grow: 1; overflow-y: auto;"></div>
-        <button class="btn-principal btn-secundario" onclick="navegar('pantalla-inicio')" style="margin-top: 10px;">Volver al Menú</button>
+        <button class="btn-principal btn-secundario" onclick="navegar('pantalla-inicio')" style="margin-top: 15px;">Volver al Inicio</button>
+        <div class="footer-autor">Design by Iván Bravo</div>
     </div>
 
-    <div id="pantalla-emociones" class="pantalla">
-        <h1>Sección 2</h1>
+    <div id="pantalla-s2-p1" class="pantalla">
+        <span style="font-size: 12px; font-weight: bold; color: #999; margin-bottom: 10px;">Paso 1 de 4</span>
         <h2>¿Cómo me siento hoy?</h2>
-        <p>Selecciona la emoción predominante en este momento:</p>
-        <div class="grid-emociones">
-            <button class="btn-señal felicidad" onclick="mostrarTecnica('felicidad')"><span class="emoji-grande">😊</span> Felicidad</button>
-            <button class="btn-señal furia" onclick="mostrarTecnica('furia')"><span class="emoji-grande">😡</span> Furia</button>
-            <button class="btn-señal tristeza" onclick="mostrarTecnica('tristeza')"><span class="emoji-grande">💧</span> Tristeza</button>
-            <button class="btn-señal asco" onclick="mostrarTecnica('asco')"><span class="emoji-grande">🤢</span> Asco</button>
-            <button class="btn-señal sorpresa" onclick="mostrarTecnica('sorpresa')"><span class="emoji-grande">😲</span> Sorpresa</button>
+        <div style="width: 100%;">
+            <button class="btn-opcion" onclick="guardarS2('emocion', 'Felicidad')">😊 Feliz</button>
+            <button class="btn-opcion" onclick="guardarS2('emocion', 'Furia')">😡 Furioso/a</button>
+            <button class="btn-opcion" onclick="guardarS2('emocion', 'Tristeza')">💧 Triste</button>
+            <button class="btn-opcion" onclick="guardarS2('emocion', 'Asco')">🤢 Asqueado/a</button>
+            <button class="btn-opcion" onclick="guardarS2('emocion', 'Sorpresa')">😲 Sorprendido/a</button>
         </div>
-        <button class="btn-principal btn-secundario" onclick="navegar('pantalla-inicio')" style="margin-top: auto;">Volver al Menú</button>
+        <button class="btn-principal btn-secundario" onclick="navegar('pantalla-inicio')" style="margin-top: auto;">Cancelar</button>
+    </div>
+
+    <div id="pantalla-s2-p2" class="pantalla">
+        <span style="font-size: 12px; font-weight: bold; color: #999; margin-bottom: 10px;">Paso 2 de 4</span>
+        <h2>¿En dónde empecé a sentir esa emoción?</h2>
+        <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; overflow-y: auto;">
+            <button class="btn-opcion" onclick="guardarS2('lugar', 'Casa')">🏠 Casa</button>
+            <button class="btn-opcion" onclick="guardarS2('lugar', 'Colegio')">🏫 Colegio</button>
+            <button class="btn-opcion" onclick="guardarS2('lugar', 'Calle')">🛣️ Calle</button>
+            <button class="btn-opcion" onclick="guardarS2('lugar', 'Salón')">🚪 Salón</button>
+            <button class="btn-opcion" onclick="guardarS2('lugar', 'Patio')">⚽ Patio</button>
+            <button class="btn-opcion" onclick="guardarS2('lugar', 'Baño')">🚰 Baño</button>
+            <button class="btn-opcion" onclick="guardarS2('lugar', 'Pasillo')">🚶 Pasillo</button>
+            <button class="btn-opcion" onclick="guardarS2('lugar', 'Escaleras')">🪜 Escaleras</button>
+            <button class="btn-opcion" style="grid-column: span 2;" onclick="guardarS2('lugar', 'Otro')">📍 Otro lugar</button>
+        </div>
+        <button class="btn-principal btn-secundario" onclick="navegar('pantalla-s2-p1')" style="margin-top: auto;">Atrás</button>
+    </div>
+
+    <div id="pantalla-s2-p3" class="pantalla">
+        <span style="font-size: 12px; font-weight: bold; color: #999; margin-bottom: 10px;">Paso 3 de 4</span>
+        <h2>¿Quién provoco esa emoción?</h2>
+        <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; overflow-y: auto;">
+            <button class="btn-opcion" onclick="guardarS2('quien', 'Yo mismo/s')">🙋 Yo mismo/a</button>
+            <button class="btn-opcion" onclick="guardarS2('quien', 'Compañero/a')">🧑‍🎓 Compañero/a</button>
+            <button class="btn-opcion" onclick="guardarS2('quien', 'Profesor/a')">👩‍🏫 Profesor/a</button>
+            <button class="btn-opcion" onclick="guardarS2('quien', 'Amigo/a')">🤝 Amigo/a</button>
+            <button class="btn-opcion" onclick="guardarS2('quien', 'Pareja')">❤️ Pareja</button>
+            <button class="btn-opcion" onclick="guardarS2('quien', 'Papá')">👨 Papá</button>
+            <button class="btn-opcion" onclick="guardarS2('quien', 'Mamá')">👩 Mamá</button>
+            <button class="btn-opcion" onclick="guardarS2('quien', 'Familiar')">🏡 Familiar</button>
+            <button class="btn-opcion" onclick="guardarS2('quien', 'Desconocido')">👤 Desconocido</button>
+            <button class="btn-opcion" onclick="guardarS2('quien', 'Otro')">❓ Otro</button>
+        </div>
+        <button class="btn-principal btn-secundario" onclick="navegar('pantalla-s2-p2')" style="margin-top: auto;">Atrás</button>
+    </div>
+
+    <div id="pantalla-s2-p4" class="pantalla">
+        <span style="font-size: 12px; font-weight: bold; color: #999; margin-bottom: 10px;">Paso 4 de 4</span>
+        <h2>¿Cuál es la intensidad de esa emoción?</h2>
+        <div style="width: 100%; margin-top: 20px;">
+            <button class="btn-opcion" style="border-left: 5px solid #2ecc71;" onclick="procesarEmocion('Baja')">🟩 Baja</button>
+            <button class="btn-opcion" style="border-left: 5px solid #f1c40f;" onclick="procesarEmocion('Media')">🟨 Media</button>
+            <button class="btn-opcion" style="border-left: 5px solid #e74c3c;" onclick="procesarEmocion('Alta')">🟥 Alta</button>
+        </div>
+        <button class="btn-principal btn-secundario" onclick="navegar('pantalla-s2-p3')" style="margin-top: auto;">Atrás</button>
     </div>
 
     <div id="pantalla-tecnica" class="pantalla">
-        <h1 id="titulo-emocion">Emoción</h1>
-        <div class="tarjeta">
-            <strong>Propósito:</strong> <span id="proposito-emocion"></span><br><br>
-            <strong>En el cuerpo:</strong> <span id="cuerpo-emocion"></span><br><br>
-            <strong>En la mente:</strong> <span id="mente-emocion"></span>
+        <h2 id="titulo-emocion" style="font-size: 22px; margin-bottom: 5px;">Emoción</h2>
+        <p style="font-size: 12px; color: #888;">¿Cuál es su propósito y cómo se percibe?</p>
+        
+        <div class="tarjeta" style="background: var(--ig-bg);">
+            <p style="margin-bottom: 10px;"><strong>🎯 Propósito:</strong> <span id="proposito-emocion"></span></p>
+            <p style="margin-bottom: 10px;"><strong>🧍 En el cuerpo:</strong> <span id="cuerpo-emocion"></span></p>
+            <p style="margin-bottom: 0;"><strong>🧠 En la mente:</strong> <span id="mente-emocion"></span></p>
         </div>
-        <div class="tarjeta" id="contenedor-herramienta" style="background-color: var(--pastel-verde);">
-            <h3 style="margin-top: 0; color: #2c3e50;">Herramienta Sugerida</h3>
-            <p id="texto-herramienta" style="font-weight: 600; font-size: 13px; color: #2c3e50;"></p>
-            <div id="animacion-respiracion" style="display: none;">
-                <div class="caja-respiracion"></div>
-                <p style="font-size: 12px; margin-top: 10px; text-align: center; color: #2c3e50;">Inhala (4s) - Mantén (4s) - Exhala (8s)</p>
-            </div>
+
+        <h2 style="margin-top: 10px; font-size: 16px;">Técnica de Regulación</h2>
+        <div class="tarjeta" style="border-color: #cc2366; text-align: center;">
+            <h3 id="nombre-tecnica" style="margin: 0 0 10px 0; font-size: 15px; color: #cc2366;"></h3>
+            <p id="desc-tecnica" style="font-size: 13px; margin-bottom: 15px;"></p>
+            
+            <div id="contenedor-anim-dinamica" class="contenedor-animacion">
+                </div>
         </div>
-        <button class="btn-principal btn-secundario" onclick="navegar('pantalla-emociones')" style="margin-top: auto;">Cambiar Emoción</button>
+
+        <button class="btn-principal" onclick="navegar('pantalla-inicio')">Finalizar</button>
+        <div class="footer-autor">Design by Iván Bravo</div>
     </div>
 
 </div>
 
 <script>
-    // === REEMPLAZA AQUÍ LA URL DE TU APPS SCRIPT NUEVO ===
+    // === URL DE GOOGLE APPS SCRIPT (Reemplazar) ===
     const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbw19jf4QpPq58ayfN03ZEwdyW3mzBuU8yur2X2MBbtB-Hcj33fV6k2Htl4VTjWmO0xHuQ/exec";
 
     function navegar(id) {
         document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
         document.getElementById(id).classList.add('activa');
+        document.getElementById('pantalla-resultados-hse').scrollTop = 0;
     }
 
-    // --- GENERAR LOS 30 ÍTEMS ---
+    // ================== LÓGICA SECCIÓN 1 (HSE) ==================
     const preguntasHSE = [
         "1. Identifico con claridad las emociones que estoy sintiendo cuando afronto un momento difícil", "2. Me cuesta mucho trabajo notar qué tipo de emoción están experimentando las personas a mi alrededor", "3. Asumo mis propios errores con respeto y reconozco de forma realista cuáles son mis fortalezas cotidianas", "4. Siento un fuerte rechazo hacia mis propias conductas cuando no logro los resultados ideales", "5. Confío plenamente en mis capacidades personales para lograr las metas y retos que me propongo", "6. Siento que soy incapaz de regular mis estados de ánimo cuando las circunstancias se vuelven estresantes", "7. Me pongo con facilidad en el lugar de otras personas para comprender sus pensamientos y emociones", "8. Me cuesta mucho entender las acciones de los demás cuando sus opiniones difieren de la mía.", "9. Expreso un interés genuino y sincero por el bienestar emocional de las personas con quienes interactúo", "10. Mantengo una distancia emocional que me impide establecer vínculos basados en la escucha atenta", "11. Realizo acciones conscientes orientadas a proteger y asegurar el bienestar general de mis compañeros", "12. Suelo desentenderme de las necesidades de apoyo afectivo de las personas más cercanas a mí.", "13. Escucho con atención plena y sin interrumpir a la otra persona cuando expresa un punto de vista.", "14. Tiendo a formular mis respuestas mentalmente en lugar de prestar atención a lo que el otro dice", "15. Expreso mis posturas y necesidades de forma clara y respetuosa sin vulnerar a quienes me rodean", "16. Manifiesto mis ideas de forma hiriente o agresiva cuando alguien contradice mis opiniones personales", "17. Busco acuerdos mediante el diálogo colaborativo intentando que todas las partes satisfagan sus necesidades", "18. Intento imponer mis propios intereses en una discusión sin ceder espacio para soluciones conjuntas", "19. Interactúo de manera consciente con mi contexto social valorando las diversas realidades culturales del medio", "20. Ignoro las características y necesidades del contexto comunitario al momento de planear mis acciones.", "21. Colaboro activamente en redes de apoyo mutuo reconociendo mi interdependencia con las demás personas", "22. Actúo de manera completamente aislada sin integrarme en los esfuerzos de cooperación de mi grupo", "23. Tomo la iniciativa de forma autónoma y responsable para resolver los problemas cotidianos que afronto.", "24. Espero a que otras personas generen soluciones o tomen decisiones antes de actuar por mí mismo.", "25. Evalúo minuciosamente la información y las emociones de una situación antes de tomar una elección", "26. Elijo cursos de acción basados únicamente en impulsos del momento sin examinar los datos disponibles", "27. Asumo con madurez las consecuencias personales y colectivas de las decisiones que decido adoptar.", "28. Trato de responsabilizar a factores externos o a terceros cuando los resultados de mis elecciones fallan", "29. Genero alternativas novedosas y creativas para afrontar las situaciones complejas desde miradas distintas", "30. Recurro siempre a los mismos métodos tradicionales evitando buscar ideas originales para resolver problemas"
     ];
@@ -206,63 +272,60 @@
             <div class="grupo-form">
                 <p class="item-pregunta">${pregunta}</p>
                 <select name="item${n}" required>
-                    <option value="">Selecciona (1 a 5)...</option><option value="1">1 - Nunca</option><option value="2">2 - Casi nunca</option><option value="3">3 - A veces</option><option value="4">4 - Frecuentemente</option><option value="5">5 - Siempre</option>
+                    <option value="">Selecciona (1 a 5)...</option>
+                    <option value="1">1 - Nunca</option><option value="2">2 - Casi nunca</option>
+                    <option value="3">3 - A veces</option><option value="4">4 - Frecuentemente</option>
+                    <option value="5">5 - Siempre</option>
                 </select>
             </div>`;
     });
 
-    // --- BASE DE DATOS DE RETROALIMENTACIÓN HSE ---
-    const retroalimentacionHSE = {
+    // Base de datos de Retroalimentación Textual (Extraída literal del documento)
+    const retroHSE = {
         "Autoconciencia": {
-            color: "#3498db",
-            bajo: "Presentas desafíos para identificar y nombrar tus emociones en momentos críticos. Se sugiere iniciar un proceso de introspección.",
-            medio: "Posees una capacidad operativa para reconocer emociones y fortalezas en entornos seguros, aunque puedes desbordarte bajo presión.",
-            alto: "Demuestras un uso maduro. Reconoces con claridad tus emociones y gestionas tus estados de ánimo proyectando una imagen segura."
+            bajo: "El participante presenta desafíos para identificar y nombrar sus emociones en momentos críticos, lo que puede limitar su capacidad para regularse de forma autónoma. Se sugiere iniciar un proceso de introspección para reconocer cómo sus estados internos influyen en su comportamiento diario.",
+            medio: "Posee una capacidad operativa para reconocer sus emociones y fortalezas en entornos seguros, aunque puede sentirse desbordado ante situaciones de alta presión. Es capaz de identificar aspectos por mejorar, pero aún está fortaleciendo la confianza en sus capacidades de autorregulación.",
+            alto: "Demuestra un uso maduro y consistente de la autoconciencia. Reconoce con claridad sus emociones, fortalezas y debilidades, gestionando sus estados de ánimo de manera autónoma y proyectando una imagen realista y segura de sí mismo en diversos escenarios."
         },
         "Empatía": {
-            color: "#e74c3c",
-            bajo: "Muestras desafíos significativos para ponerte en el lugar del otro. Tendencia a centrarte en tu propia perspectiva.",
-            medio: "Eres capaz de comprender emociones ajenas, pero en situaciones de conflicto tu respuesta puede tornarse reactiva.",
-            alto: "Posees una notable capacidad para la toma de perspectiva y actúas de forma proactiva para proteger el bienestar de otros."
+            bajo: "Muestra desafíos significativos para ponerse en el lugar del otro y conectar afectivamente con sus necesidades. Existe una tendencia a centrarse en su propia perspectiva, lo que puede dificultar la construcción de vínculos basados en la escucha y el interés genuino.",
+            medio: "Es capaz de comprender las emociones ajenas en diversos contextos, mostrando disposición para escuchar. Sin embargo, en situaciones de conflicto o desacuerdo, su respuesta puede tornarse reactiva, limitando su capacidad para cuidar del bienestar de los demás.",
+            alto: "Posee una notable capacidad para la toma de perspectiva y la conexión afectiva. Actúa de forma proactiva para proteger el bienestar de otros, demostrando un compromiso genuino con el apoyo recíproco y la escucha empática en todas sus interacciones."
         },
         "Manejo de Conflictos": {
-            color: "#f39c12",
-            bajo: "Percibes el conflicto como una barrera. Existe dificultad para mantener escucha activa, derivando en evitación del diálogo.",
-            medio: "Conoces herramientas de comunicación asertiva, pero bajo presión puedes tender a imponer tus puntos de vista.",
-            alto: "Abordas los conflictos como oportunidades de crecimiento constructivo, utilizando la negociación colaborativa y el respeto."
+            bajo: "El conflicto es percibido predominantemente como una amenaza o una barrera. Existe dificultad para mantener una escucha activa o expresar ideas de manera asertiva, lo que suele derivar en una comunicación hiriente o en la evitación del diálogo colaborativo.",
+            medio: "Conoce las herramientas de comunicación asertiva y negociación, empleándolas cuando el ambiente es propicio. Bajo presión, puede tender a imponer sus puntos de vista, pero es capaz de reflexionar sobre el proceso después de que la tensión ha disminuido.",
+            alto: "Aborda los conflictos como oportunidades de crecimiento y transformación constructiva. Utiliza la escucha plena y la negociación colaborativa para buscar soluciones que satisfagan a todas las partes, manteniendo siempre un tono claro y respetuoso."
         },
         "Agencia": {
-            color: "#9b59b6",
-            bajo: "Presentas una actitud pasiva frente a tu desarrollo. Tiendes a esperar directrices y aislarte de los esfuerzos del grupo.",
-            medio: "Reconoces tu entorno y colaboras cuando te sientes integrado. Tu proactividad es fluctuante según la autonomía permitida.",
-            alto: "Actúas con alta iniciativa y responsabilidad. Promueves redes de apoyo mutuo contribuyendo al desarrollo de tu comunidad."
+            bajo: "Presenta una actitud pasiva frente a su propio desarrollo y el contexto comunitario. Tiende a esperar las directrices de otros para actuar y muestra dificultades para reconocer su capacidad de influencia y su interdependencia con el grupo.",
+            medio: "Reconoce su entorno y colabora en redes de apoyo cuando se siente integrado. Su proactividad es fluctuante, dependiendo del nivel de autonomía permitido en el momento, pero demuestra capacidad para integrarse a esfuerzos de cooperación comunes.",
+            alto: "Actúa con alta proactividad, iniciativa y responsabilidad. Comprende profundamente su rol transformador en el entorno, promoviendo redes de apoyo mutuo y tomando decisiones autónomas que contribuyen positivamente al desarrollo de su comunidad."
         },
         "Toma de Decisiones": {
-            color: "#2ecc71",
-            bajo: "Tus decisiones suelen ser reactivas, basadas en impulsos momentáneos y con tendencia a responsabilizar a factores externos.",
-            medio: "Evalúas información básica, aunque en crisis recurres a soluciones convencionales por seguridad. Asumes las consecuencias con madurez.",
-            alto: "Toma decisiones fundamentadas mediante un pensamiento crítico. Anticipas consecuencias asumiendo total responsabilidad."
+            bajo: "Sus decisiones suelen ser reactivas, basadas en impulsos momentáneos o en la repetición de métodos tradicionales sin considerar consecuencias. Existe una marcada tendencia a delegar la responsabilidad de los resultados en terceros o en factores externos.",
+            medio: "Evalúa información básica antes de elegir, aunque en situaciones complejas puede recurrir a soluciones convencionales por seguridad. Asume las consecuencias de sus actos con madurez, aunque requiere mayor práctica en el uso del pensamiento creativo para generar alternativas novedosas.",
+            alto: "Toma decisiones fundamentadas mediante un pensamiento crítico y creativo. Anticipa consecuencias de manera integral, asumiendo total responsabilidad por sus elecciones y buscando constantemente alternativas innovadoras que favorezcan el bienestar colectivo."
         }
     };
 
-    // --- PROCESAR FORMULARIO Y ENVIAR ---
     document.getElementById("formulario-hse").addEventListener("submit", function(e) {
         e.preventDefault();
         const btn = document.getElementById("btn-enviar-hse");
-        btn.innerText = "Procesando y Guardando..."; btn.disabled = true;
+        btn.innerText = "Calculando..."; btn.disabled = true;
 
         const formData = new FormData(this);
         const itemsInversos = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30];
         let valores = [];
 
+        // RECODIFICACIÓN MATEMÁTICA EXACTA: Si es inverso, cambia 1->5, 2->4, 3->3, 4->2, 5->1 (Regla: 6 - valor)
         for (let i = 1; i <= 30; i++) {
             let val = parseInt(formData.get("item" + i));
-            if (itemsInversos.includes(i)) {
-                if (val === 1) val = 5; else if (val === 2) val = 4; else if (val === 4) val = 2; else if (val === 5) val = 1;
-            }
-            valores.push(val); // Índice 0 es item 1
+            if (itemsInversos.includes(i)) { val = 6 - val; }
+            valores.push(val); 
         }
 
+        // CÁLCULO POR DIMENSIONES
         const puntajes = {
             "Autoconciencia": valores.slice(0, 6).reduce((a, b) => a + b, 0),
             "Empatía": valores.slice(6, 12).reduce((a, b) => a + b, 0),
@@ -274,83 +337,116 @@
         let htmlResultados = "";
         for (const [habilidad, puntos] of Object.entries(puntajes)) {
             let nivel = puntos >= 23 ? "alto" : (puntos >= 15 ? "medio" : "bajo");
-            let texto = retroalimentacionHSE[habilidad][nivel];
-            let color = retroalimentacionHSE[habilidad].color;
-            let nivelTexto = nivel.charAt(0).toUpperCase() + nivel.slice(1);
+            let texto = retroHSE[habilidad][nivel];
+            let claseBg = "bg-" + nivel;
+            let nivelLabel = "Desarrollo " + nivel.charAt(0).toUpperCase() + nivel.slice(1);
             
             htmlResultados += `
-                <div class="tarjeta tarjeta-resultado" style="border-color: ${color};">
-                    <strong style="color: ${color}; font-size: 15px;">${habilidad}: ${puntos}/30 pts (Nivel ${nivelTexto})</strong><br><br>${texto}
+                <div class="tarjeta">
+                    <h3 style="margin: 0 0 5px 0;">${habilidad}</h3>
+                    <span class="etiqueta-nivel ${claseBg}">${nivelLabel} (${puntos}/30 pts)</span>
+                    <p style="margin-top: 8px; margin-bottom: 0;">${texto}</p>
                 </div>`;
         }
 
-        // Enviar a Google Sheets
         fetch(URL_GOOGLE_SHEETS, { method: "POST", mode: "no-cors", body: formData })
         .then(() => {
-            document.getElementById("contenido-resultados").innerHTML = htmlResultados;
-            document.getElementById("mensaje-exito").innerHTML = '<span style="color:green; font-weight:bold;">✓ Tus respuestas se guardaron exitosamente en la base de datos.</span>';
-            btn.innerText = "Enviar y Ver Resultados"; btn.disabled = false;
+            document.getElementById("contenido-resultados").innerHTML = `<p style="color:#2ecc71; font-weight:bold; text-align:center;">✓ Respuestas guardadas en Sheets</p>` + htmlResultados;
+            btn.innerText = "Enviar y Calcular"; btn.disabled = false;
             navegar('pantalla-resultados-hse');
             this.reset();
         }).catch(err => {
-            alert("Error de conexión. Revisa tu internet e intenta de nuevo.");
-            btn.innerText = "Enviar y Ver Resultados"; btn.disabled = false;
+            alert("Error de red, pero puedes ver tus resultados.");
+            document.getElementById("contenido-resultados").innerHTML = htmlResultados;
+            btn.innerText = "Enviar y Calcular"; btn.disabled = false;
+            navegar('pantalla-resultados-hse');
         });
     });
 
-    // --- SECCIÓN 2: DATOS DE EMOCIONES ---
-    const datosEmociones = {
-        "felicidad": {
-            titulo: "Felicidad",
-            proposito: "Ayudarnos a conectar con los demás, disfrutar experiencias agradables y fortalecer aquello que nos hace bien.",
-            cuerpo: "Energía, relajación muscular, sonrisas espontáneas y ganas de moverse.",
-            mente: "Pensamientos positivos, tranquilidad, motivación y gratitud.",
-            herramienta: "Técnica: Expresar lo que siento. Escribe o dile a alguien cercano qué te hizo sentir tan bien hoy.",
-            animacion: false
+    // ================== LÓGICA SECCIÓN 2 (EMOCIONES) ==================
+    let datosS2 = { emocion: "", lugar: "", quien: "", intensidad: "" };
+
+    function iniciarSeccionEmociones() { navegar('pantalla-s2-p1'); }
+
+    function guardarS2(campo, valor) {
+        datosS2[campo] = valor;
+        if(campo === 'emocion') navegar('pantalla-s2-p2');
+        if(campo === 'lugar') navegar('pantalla-s2-p3');
+        if(campo === 'quien') navegar('pantalla-s2-p4');
+    }
+
+    // Textos literales del documento
+    const infoEmociones = {
+        "Felicidad": {
+            proposito: "La felicidad tiene el propósito de ayudarnos a conectar con los demás, disfrutar experiencias agradables y fortalecer aquello que nos hace bien.",
+            cuerpo: "En el cuerpo puede sentirse como energía, relajación muscular, sonrisas espontáneas, ganas de moverse o una sensación de bienestar general.",
+            mente: "En la mente suele aparecer en forma de pensamientos positivos, tranquilidad, motivación, gratitud y deseos de compartir con otras personas."
         },
-        "furia": {
-            titulo: "Furia / Enojo",
-            proposito: "Protegernos, defender nuestros límites y reaccionar ante situaciones injustas o amenazantes.",
-            cuerpo: "Tensión muscular, respiración rápida, aumento del ritmo cardíaco y calor.",
-            mente: "Pensamientos acelerados, irritabilidad, deseos de confrontar.",
-            herramienta: "Técnica: Respiración 4-4-8. Sigue el circuito visual abajo para desacelerar tu ritmo cardíaco y recuperar el control.",
-            animacion: true
+        "Furia": {
+            proposito: "La furia o el enojo tiene como propósito protegernos, defender nuestros límites y reaccionar ante situaciones que consideramos injustas o amenazantes.",
+            cuerpo: "En el cuerpo puede manifestarse con tensión muscular, respiración rápida, aumento del ritmo cardíaco, calor corporal o ganas de gritar.",
+            mente: "En la mente pueden surgir pensamientos acelerados, irritabilidad, deseos de confrontar, dificultad para concentrarse o necesidad de alejarse de la situación."
         },
-        "tristeza": {
-            titulo: "Tristeza",
-            proposito: "Procesar pérdidas, decepciones o situaciones dolorosas, permitiéndonos reflexionar y buscar apoyo.",
-            cuerpo: "Cansancio, llanto, pesadez, falta de energía o nudo en la garganta.",
-            mente: "Pensamientos de nostalgia, desánimo y necesidad de estar solos.",
-            herramienta: "Técnica: Pausa corporal. Cambia de espacio, estírate suavemente y busca tu red de apoyo (amigos o familiares).",
-            animacion: false
+        "Tristeza": {
+            proposito: "La tristeza nos ayuda a procesar pérdidas, decepciones o situaciones dolorosas, permitiéndonos reflexionar y buscar apoyo.",
+            cuerpo: "En el cuerpo puede sentirse como cansancio, llanto, pesadez, falta de energía o un nudo en la garganta.",
+            mente: "En la mente aparecen pensamientos de nostalgia, desánimo, necesidad de estar solos o dificultad para encontrar motivación."
         },
-        "asco": {
-            titulo: "Asco",
-            proposito: "Protegernos de aquello que percibimos como desagradable, peligroso o dañino.",
-            cuerpo: "Náuseas, rechazo, tensión facial o ganas de alejarnos rápidamente.",
-            mente: "Incomodidad, desaprobación o necesidad de evitar a ciertas personas/situaciones.",
-            herramienta: "Técnica: Pensamiento consciente. Pregúntate: ¿Qué necesito evitar ahora mismo para sentirme a salvo?",
-            animacion: false
+        "Asco": {
+            proposito: "El asco tiene la función de protegernos de aquello que percibimos como desagradable, peligroso o dañino, ya sea física o emocionalmente.",
+            cuerpo: "En el cuerpo puede sentirse como náuseas, rechazo, tensión facial o ganas de alejarnos rápidamente.",
+            mente: "En la mente genera pensamientos de rechazo, incomodidad, desaprobación o necesidad de evitar ciertas personas, situaciones u objetos."
         },
-        "sorpresa": {
-            titulo: "Sorpresa",
-            proposito: "Prepararnos para reaccionar rápidamente ante algo inesperado y adaptarnos a nuevas situaciones.",
-            cuerpo: "Sobresalto, aumento de atención, ojos abiertos e inmovilidad momentánea.",
-            mente: "Curiosidad, alerta o necesidad de comprender lo que acaba de ocurrir.",
-            herramienta: "Técnica: Anclaje 5-4-3-2-1. Enumera mentalmente los 5 últimos objetos que viste para evacuar la sobrecarga mental.",
-            animacion: false
+        "Sorpresa": {
+            proposito: "La sorpresa nos prepara para reaccionar rápidamente ante algo inesperado y adaptarnos a nuevas situaciones.",
+            cuerpo: "En el cuerpo puede sentirse como un sobresalto, aumento de atención, ojos abiertos, respiración rápida o inmovilidad momentánea.",
+            mente: "En la mente genera curiosidad, confusión, alerta o necesidad de comprender lo que acaba de ocurrir."
         }
     };
 
-    function mostrarTecnica(emocion) {
-        const data = datosEmociones[emocion];
-        document.getElementById("titulo-emocion").innerText = data.titulo;
-        document.getElementById("proposito-emocion").innerText = data.proposito;
-        document.getElementById("cuerpo-emocion").innerText = data.cuerpo;
-        document.getElementById("mente-emocion").innerText = data.mente;
-        document.getElementById("texto-herramienta").innerText = data.herramienta;
-        
-        document.getElementById("animacion-respiracion").style.display = data.animacion ? "block" : "none";
+    const tecnicasDinamicas = {
+        "Felicidad": {
+            nombre: "Expresar lo que siento",
+            desc: "Hablar con alguien de confianza o escribir lo que ocurre para compartir y anclar esta sensación positiva.",
+            html: `<div class="icono-anclaje">✍️</div>`
+        },
+        "Furia": {
+            nombre: "Respiración 4-4-8",
+            desc: "Ingresa el aire por la nariz en 4 segundos, mantenlo 4 segundos, y libéralo por la boca en 8 segundos. Sigue el círculo.",
+            html: `<div class="circulo-respirar"></div>`
+        },
+        "Tristeza": {
+            nombre: "Pausa corporal",
+            desc: "Caminar, estirarse, tomar agua o cambiar de espacio ayuda a recuperar la calma.",
+            html: `<div class="icono-pausa">⏳</div>`
+        },
+        "Asco": {
+            nombre: "Identificar la emoción",
+            desc: "Ponerle nombre exacto a lo que sentimos ayuda a comprenderlo y manejarlo mejor. Di en voz alta qué te genera rechazo.",
+            html: `<div class="icono-anclaje">🔍</div>`
+        },
+        "Sorpresa": {
+            nombre: "Técnica de anclaje 5,4,3,2,1",
+            desc: "Evacúa el pensamiento acelerado enumerando: 5 cosas que ves, 4 que escuchas, 3 que tocas, 2 que hueles y 1 que saboreas.",
+            html: `<div class="icono-shaking">🖐️</div>`
+        }
+    };
+
+    function procesarEmocion(intensidad) {
+        datosS2.intensidad = intensidad;
+        let e = datosS2.emocion;
+        let info = infoEmociones[e];
+        let tec = tecnicasDinamicas[e];
+
+        document.getElementById("titulo-emocion").innerText = e + " (" + intensidad + ")";
+        document.getElementById("proposito-emocion").innerText = info.proposito;
+        document.getElementById("cuerpo-emocion").innerText = info.cuerpo;
+        document.getElementById("mente-emocion").innerText = info.mente;
+
+        document.getElementById("nombre-tecnica").innerText = tec.nombre;
+        document.getElementById("desc-tecnica").innerText = tec.desc;
+        document.getElementById("contenedor-anim-dinamica").innerHTML = tec.html;
+
         navegar('pantalla-tecnica');
     }
 </script>
