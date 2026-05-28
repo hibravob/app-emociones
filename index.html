@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Emociones y HSE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Mi Bienestar Emocional</h1>
+        
+        <section id="seccion-hse">
+            <h2>Sección 1: Evaluar mis habilidades socioemocionales</h2>
+            
+            <form id="formulario-hse">
+                
+                <div class="grupo-formulario">
+                    <h3>Datos Sociodemográficos y Laborales</h3>
+                    
+                    <label for="genero">Género:</label>
+                    <select name="genero" id="genero" required>
+                        <option value="">Selecciona...</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="No binario">No binario</option>
+                        <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+                    </select>
+
+                    <label for="sexo">Sexo:</label>
+                    <select name="sexo" id="sexo" required>
+                        <option value="">Selecciona...</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Intersexual">Intersexual</option>
+                    </select>
+
+                    <label for="edad">Edad:</label>
+                    <input type="number" name="edad" id="edad" min="15" max="100" placeholder="Ej. 31" required>
+
+                    <label for="sede">Sede del Colegio Alexander Fleming en la que labora:</label>
+                    <select name="sede" id="sede" required>
+                        <option value="">Selecciona la sede...</option>
+                        <option value="Sede A">Sede A</option>
+                        <option value="Sede B">Sede B</option>
+                        <option value="Sede C">Sede C</option>
+                    </select>
+
+                    <label for="jornada">Jornada escolar en la que labora:</label>
+                    <select name="jornada" id="jornada" required>
+                        <option value="">Selecciona la jornada...</option>
+                        <option value="Mañana">Mañana</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Única">Única</option>
+                        <option value="Nocturna">Nocturna</option>
+                    </select>
+
+                    <label for="nivel_educativo">Nivel educativo en que se desempeña (Nivel principal donde dicta clases):</label>
+                    <select name="nivel_educativo" id="nivel_educativo" required>
+                        <option value="">Selecciona el nivel...</option>
+                        <option value="Preescolar">Preescolar</option>
+                        <option value="Primaria">Primaria</option>
+                        <option value="Secundaria">Secundaria</option>
+                        <option value="Media">Media</option>
+                    </select>
+
+                    <label for="area_desempeno">Área de desempeño principal (Área obligatoria o fundamental a su cargo):</label>
+                    <select name="area_desempeno" id="area_desempeno" required>
+                        <option value="">Selecciona el área...</option>
+                        <option value="Matemáticas">Matemáticas</option>
+                        <option value="Humanidades y Lengua Castellana">Humanidades y Lengua Castellana</option>
+                        <option value="Idiomas Extranjeros">Idiomas Extranjeros</option>
+                        <option value="Ciencias Naturales">Ciencias Naturales</option>
+                        <option value="Ciencias Sociales">Ciencias Sociales</option>
+                        <option value="Educación Física">Educación Física</option>
+                        <option value="Educación Artística">Educación Artística</option>
+                        <option value="Tecnología e Informática">Tecnología e Informática</option>
+                        <option value="Ética y Valores">Ética y Valores</option>
+                        <option value="Religión">Religión</option>
+                        <option value="Filosofía">Filosofía</option>
+                        <option value="Otra">Otra área</option>
+                    </select>
+                </div>
+
+                <hr>
+
+                <div class="instrucciones">
+                    <h3>Escala de Habilidades Socioemocionales</h3>
+                    <p><em>Por favor, lee detenidamente cada una de las siguientes afirmaciones y selecciona la opción que mejor describa tu comportamiento o sentir habitual en el día a día. No hay respuestas correctas o incorrectas; responde con la mayor sinceridad y franqueza posible.</em></p>
+                    <p><strong>Escala de respuestas:</strong> 1 = Nunca | 2 = Casi nunca | 3 = A veces | 4 = Frecuentemente | 5 = Siempre</p>
+                </div>
+
+                <div class="bloque-items">
+                    <p>1. Identifico con claridad las emociones que estoy sintiendo cuando afronto un momento difícil </p>
+                    <select name="item1" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>2. Me cuesta mucho trabajo notar qué tipo de emoción están experimentando las personas a mi alrededor </p>
+                    <select name="item2" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>3. Asumo mis propios errores con respeto y reconozco de forma realista cuáles son mis fortalezas cotidianas </p>
+                    <select name="item3" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>4. Siento un fuerte rechazo hacia mis propias conductas cuando no logro los resultados ideales </p>
+                    <select name="item4" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>5. Confío plenamente en mis capacidades personales para lograr las metas y retos que me propongo </p>
+                    <select name="item5" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>6. Siento que soy incapaz de regular mis estados de ánimo cuando las circunstancias se vuelven estresantes </p>
+                    <select name="item6" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>7. Me pongo con facilidad en el lugar de otras personas para comprender sus pensamientos y emociones </p>
+                    <select name="item7" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>8. Me cuesta mucho entender las acciones de los demás cuando sus opiniones difieren de la mía </p>
+                    <select name="item8" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>9. Expreso un interés genuino y sincero por el bienestar emocional de las personas con quienes interactúo </p>
+                    <select name="item9" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>10. Mantengo una distancia emocional que me impide establecer vínculos basados en la escucha atenta </p>
+                    <select name="item10" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>11. Realizo acciones conscientes orientadas a proteger y asegurar el bienestar general de mis compañeros </p>
+                    <select name="item11" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>12. Suelo desentenderme de las necesidades de apoyo afectivo de las personas más cercanas a mí </p>
+                    <select name="item12" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>13. Escucho con atención plena y sin interrumpir a la otra persona cuando expresa un punto de vista </p>
+                    <select name="item13" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>14. Tiendo a formular mis respuestas mentalmente en lugar de prestar atención a lo que el otro dice </p>
+                    <select name="item14" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>15. Expreso mis posturas y necesidades de forma clara y respetuosa sin vulnerar a quienes me rodean </p>
+                    <select name="item15" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>16. Manifiesto mis ideas de forma hiriente o agresiva cuando alguien contradice mis opiniones personales </p>
+                    <select name="item16" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>17. Busco acuerdos mediante el diálogo colaborativo intentando que todas las partes satisfagan sus necesidades </p>
+                    <select name="item17" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>18. Intento imponer mis propios intereses en una discusión sin ceder espacio para soluciones conjuntas </p>
+                    <select name="item18" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>19. Interactúo de manera consciente con mi contexto social valorando las diversas realidades culturales del medio </p>
+                    <select name="item19" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>20. Ignoro las características y necesidades del contexto comunitario al momento de planear mis acciones </p>
+                    <select name="item20" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>21. Colaboro activamente en redes de apoyo mutuo reconociendo mi interdependencia con las demás personas </p>
+                    <select name="item21" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>22. Actúo de manera completamente aislada sin integrarme en los esfuerzos de cooperación de mi grupo </p>
+                    <select name="item22" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>23. Tomo la iniciativa de forma autónoma y responsable para resolver los problemas cotidianos que afronto </p>
+                    <select name="item23" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>24. Espero a que otras personas generen soluciones o tomen decisiones antes de actuar por mí mismo </p>
+                    <select name="item24" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>25. Evalúo minuciosamente la información y las emociones de una situación antes de tomar una elección </p>
+                    <select name="item25" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>26. Elijo cursos de acción basados únicamente en impulsos del momento sin examinar los datos disponibles </p>
+                    <select name="item26" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>27. Asumo con madurez las consecuencias personales y colectivas de las decisiones que decido adoptar </p>
+                    <select name="item27" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>28. Trato de responsabilizar a factores externos o a terceros cuando los resultados de mis elecciones fallan </p>
+                    <select name="item28" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>29. Genero alternativas novedosas y creativas para afrontar las situaciones complejas desde miradas distintas </p>
+                    <select name="item29" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+
+                    <p>30. Recurro siempre a los mismos métodos tradicionales evitando buscar ideas originales para resolver problemas </p>
+                    <select name="item30" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+                </div>
+
+                <button type="submit">Enviar Respuestas</button>
+            </form>
+            <div id="resultado-hse" class="oculto"></div>
+        </section>
+
+        <hr>
+
+        <section id="seccion-emociones">
+            <h2>Sección 2: ¿Cómo me siento hoy?</h2>
+            <label for="selector-emocion">Elige la emoción predominante en este momento:</label>
+            <select id="selector-emocion">
+                <option value="">Selecciona...</option>
+                <option value="felicidad">Feliz</option>
+                <option value="furia">Furioso/a</option>
+                <option value="tristeza">Triste</option>
+                <option value="asco">Asqueado/a</option>
+                <option value="sorpresa">Sorprendido/a</option>
+            </select>
+            <button onclick="mostrarTecnica()">Identificar y Regular</button>
+
+            <div id="tecnica-regulacion" class="oculto">
+                <h3 id="titulo-tecnica"></h3>
+                <p id="texto-tecnica"></p>
+                
+                <div id="animacion-respiracion" class="oculto">
+                    <div class="circulo-respirar"></div>
+                    <p style="text-align: center;"><strong>Sigue la animación:</strong> Inhala mientras se expande (4s), mantén el aire (4s) y exhala mientras se encoge (8s).</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
