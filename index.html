@@ -3,216 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Emociones y HSE</title>
-    <link rel="stylesheet" href="style.css">
+    <title>App HSE y Emociones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --fondo-app: #fdfbf7;
+            --pastel-rojo: #ffb7b2;
+            --pastel-amarillo: #ffe4b5;
+            --pastel-azul: #d0e8f2;
+            --pastel-morado: #e2d1f9;
+            --pastel-verde: #a8d5ba;
+            --texto-oscuro: #4a4a4a;
+            --azul-fuerte: #3498db;
+        }
+
+        body {
+            margin: 0; display: flex; justify-content: center; align-items: center;
+            height: 100vh; background-color: #e9ecef; font-family: 'Quicksand', sans-serif;
+            color: var(--texto-oscuro);
+        }
+
+        .app-mobile {
+            width: 360px; height: 700px; background-color: var(--fondo-app);
+            border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden; position: relative; display: flex; flex-direction: column;
+        }
+
+        .pantalla {
+            display: none; padding: 30px 20px; height: 100%; box-sizing: border-box;
+            flex-direction: column; align-items: center; text-align: center;
+            animation: fadeIn 0.4s ease-in-out; overflow-y: auto;
+        }
+
+        .pantalla.activa { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 { font-size: 22px; margin-bottom: 5px; color: #2c3e50; }
+        h2 { font-size: 18px; color: #34495e; margin-bottom: 15px;}
+        p { font-size: 14px; margin-bottom: 20px; line-height: 1.4; }
+
+        .btn-principal {
+            background-color: var(--pastel-verde); color: #2c3e50; border: none;
+            padding: 15px 20px; border-radius: 30px; font-size: 15px; font-weight: 700;
+            cursor: pointer; width: 90%; margin-top: 10px; transition: 0.3s; flex-shrink: 0;
+        }
+        .btn-secundario { background-color: #e0e0e0; }
+        .btn-menu { background-color: var(--pastel-azul); padding: 25px; margin-bottom: 20px; border-radius: 20px; border: 3px solid #b9d8e6; font-size: 16px;}
+
+        /* --- FORMULARIO HSE --- */
+        .grupo-form { text-align: left; width: 100%; margin-bottom: 15px; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); box-sizing: border-box;}
+        label { font-weight: bold; font-size: 13px; display: block; margin-bottom: 5px; color: #2c3e50;}
+        select, input[type="number"] { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; font-family: 'Quicksand'; box-sizing: border-box; margin-bottom: 10px;}
+        .item-pregunta { font-size: 13px; margin-bottom: 8px; font-weight: 600;}
+        
+        /* --- BOTONES EMOCIONES --- */
+        .grid-emociones { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; margin-bottom: 15px; }
+        .btn-señal {
+            background-color: white; border: 3px solid #e0e0e0; border-radius: 20px;
+            padding: 10px; font-size: 13px; font-family: 'Quicksand', sans-serif; font-weight: bold;
+            cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 5px;
+        }
+        .btn-señal.furia { border-bottom-color: var(--pastel-rojo); }
+        .btn-señal.sorpresa { border-bottom-color: var(--pastel-amarillo); }
+        .btn-señal.tristeza { border-bottom-color: var(--pastel-azul); }
+        .btn-señal.asco { border-bottom-color: var(--pastel-morado); }
+        .btn-señal.felicidad { border-bottom-color: var(--pastel-verde); }
+        .emoji-grande { font-size: 30px; margin-bottom: 5px;}
+
+        /* --- TARJETAS --- */
+        .tarjeta { background: white; width: 100%; padding: 15px; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; box-sizing: border-box; font-size: 13px;}
+        .tarjeta-resultado { border-left: 5px solid; margin-bottom: 10px; }
+
+        /* --- RESPIRACIÓN --- */
+        .caja-respiracion {
+            width: 140px; height: 140px; border: 8px solid var(--pastel-verde);
+            border-radius: 50%; position: relative; margin: 20px auto;
+            display: flex; justify-content: center; align-items: center; background-color: white; 
+            animation: respirar 16s infinite;
+        }
+        @keyframes respirar {
+            0% { transform: scale(1); background-color: white; }
+            25% { transform: scale(1.3); background-color: var(--pastel-verde); }
+            50% { transform: scale(1.3); background-color: var(--pastel-verde); }
+            100% { transform: scale(1); background-color: white; }
+        }
+    </style>
 </head>
 <body>
-    <div class="contenedor">
-        <h1>Mi Bienestar Emocional</h1>
+
+<div class="app-mobile">
+
+    <div id="pantalla-inicio" class="pantalla activa">
+        <div style="font-size: 60px; margin-bottom: 10px;">🧭</div>
+        <h1>GPS Emocional</h1>
+        <p>Bienvenido. Elige la ruta que deseas tomar hoy:</p>
         
-        <section id="seccion-hse">
-            <h2>Sección 1: Evaluar mis habilidades socioemocionales</h2>
-            
-            <form id="formulario-hse">
-                
-                <div class="grupo-formulario">
-                    <h3>Datos Sociodemográficos y Laborales</h3>
-                    
-                    <label for="genero">Género:</label>
-                    <select name="genero" id="genero" required>
-                        <option value="">Selecciona...</option>
-                        <option value="Femenino">Femenino</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="No binario">No binario</option>
-                        <option value="Prefiero no decirlo">Prefiero no decirlo</option>
-                    </select>
-
-                    <label for="sexo">Sexo:</label>
-                    <select name="sexo" id="sexo" required>
-                        <option value="">Selecciona...</option>
-                        <option value="Femenino">Femenino</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Intersexual">Intersexual</option>
-                    </select>
-
-                    <label for="edad">Edad:</label>
-                    <input type="number" name="edad" id="edad" min="15" max="100" placeholder="Ej. 31" required>
-
-                    <label for="sede">Sede del Colegio Alexander Fleming en la que labora:</label>
-                    <select name="sede" id="sede" required>
-                        <option value="">Selecciona la sede...</option>
-                        <option value="Sede A">Sede A</option>
-                        <option value="Sede B">Sede B</option>
-                        <option value="Sede C">Sede C</option>
-                    </select>
-
-                    <label for="jornada">Jornada escolar en la que labora:</label>
-                    <select name="jornada" id="jornada" required>
-                        <option value="">Selecciona la jornada...</option>
-                        <option value="Mañana">Mañana</option>
-                        <option value="Tarde">Tarde</option>
-                        <option value="Única">Única</option>
-                        <option value="Nocturna">Nocturna</option>
-                    </select>
-
-                    <label for="nivel_educativo">Nivel educativo en que se desempeña (Nivel principal donde dicta clases):</label>
-                    <select name="nivel_educativo" id="nivel_educativo" required>
-                        <option value="">Selecciona el nivel...</option>
-                        <option value="Preescolar">Preescolar</option>
-                        <option value="Primaria">Primaria</option>
-                        <option value="Secundaria">Secundaria</option>
-                        <option value="Media">Media</option>
-                    </select>
-
-                    <label for="area_desempeno">Área de desempeño principal (Área obligatoria o fundamental a su cargo):</label>
-                    <select name="area_desempeno" id="area_desempeno" required>
-                        <option value="">Selecciona el área...</option>
-                        <option value="Matemáticas">Matemáticas</option>
-                        <option value="Humanidades y Lengua Castellana">Humanidades y Lengua Castellana</option>
-                        <option value="Idiomas Extranjeros">Idiomas Extranjeros</option>
-                        <option value="Ciencias Naturales">Ciencias Naturales</option>
-                        <option value="Ciencias Sociales">Ciencias Sociales</option>
-                        <option value="Educación Física">Educación Física</option>
-                        <option value="Educación Artística">Educación Artística</option>
-                        <option value="Tecnología e Informática">Tecnología e Informática</option>
-                        <option value="Ética y Valores">Ética y Valores</option>
-                        <option value="Religión">Religión</option>
-                        <option value="Filosofía">Filosofía</option>
-                        <option value="Otra">Otra área</option>
-                    </select>
-                </div>
-
-                <hr>
-
-                <div class="instrucciones">
-                    <h3>Escala de Habilidades Socioemocionales</h3>
-                    <p><em>Por favor, lee detenidamente cada una de las siguientes afirmaciones y selecciona la opción que mejor describa tu comportamiento o sentir habitual en el día a día. No hay respuestas correctas o incorrectas; responde con la mayor sinceridad y franqueza posible.</em></p>
-                    <p><strong>Escala de respuestas:</strong> 1 = Nunca | 2 = Casi nunca | 3 = A veces | 4 = Frecuentemente | 5 = Siempre</p>
-                </div>
-
-                <div class="bloque-items">
-                    <p>1. Identifico con claridad las emociones que estoy sintiendo cuando afronto un momento difícil </p>
-                    <select name="item1" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>2. Me cuesta mucho trabajo notar qué tipo de emoción están experimentando las personas a mi alrededor </p>
-                    <select name="item2" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>3. Asumo mis propios errores con respeto y reconozco de forma realista cuáles son mis fortalezas cotidianas </p>
-                    <select name="item3" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>4. Siento un fuerte rechazo hacia mis propias conductas cuando no logro los resultados ideales </p>
-                    <select name="item4" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>5. Confío plenamente en mis capacidades personales para lograr las metas y retos que me propongo </p>
-                    <select name="item5" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>6. Siento que soy incapaz de regular mis estados de ánimo cuando las circunstancias se vuelven estresantes </p>
-                    <select name="item6" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>7. Me pongo con facilidad en el lugar de otras personas para comprender sus pensamientos y emociones </p>
-                    <select name="item7" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>8. Me cuesta mucho entender las acciones de los demás cuando sus opiniones difieren de la mía </p>
-                    <select name="item8" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>9. Expreso un interés genuino y sincero por el bienestar emocional de las personas con quienes interactúo </p>
-                    <select name="item9" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>10. Mantengo una distancia emocional que me impide establecer vínculos basados en la escucha atenta </p>
-                    <select name="item10" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>11. Realizo acciones conscientes orientadas a proteger y asegurar el bienestar general de mis compañeros </p>
-                    <select name="item11" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>12. Suelo desentenderme de las necesidades de apoyo afectivo de las personas más cercanas a mí </p>
-                    <select name="item12" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>13. Escucho con atención plena y sin interrumpir a la otra persona cuando expresa un punto de vista </p>
-                    <select name="item13" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>14. Tiendo a formular mis respuestas mentalmente en lugar de prestar atención a lo que el otro dice </p>
-                    <select name="item14" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>15. Expreso mis posturas y necesidades de forma clara y respetuosa sin vulnerar a quienes me rodean </p>
-                    <select name="item15" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>16. Manifiesto mis ideas de forma hiriente o agresiva cuando alguien contradice mis opiniones personales </p>
-                    <select name="item16" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>17. Busco acuerdos mediante el diálogo colaborativo intentando que todas las partes satisfagan sus necesidades </p>
-                    <select name="item17" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>18. Intento imponer mis propios intereses en una discusión sin ceder espacio para soluciones conjuntas </p>
-                    <select name="item18" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>19. Interactúo de manera consciente con mi contexto social valorando las diversas realidades culturales del medio </p>
-                    <select name="item19" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>20. Ignoro las características y necesidades del contexto comunitario al momento de planear mis acciones </p>
-                    <select name="item20" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>21. Colaboro activamente en redes de apoyo mutuo reconociendo mi interdependencia con las demás personas </p>
-                    <select name="item21" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>22. Actúo de manera completamente aislada sin integrarme en los esfuerzos de cooperación de mi grupo </p>
-                    <select name="item22" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>23. Tomo la iniciativa de forma autónoma y responsable para resolver los problemas cotidianos que afronto </p>
-                    <select name="item23" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>24. Espero a que otras personas generen soluciones o tomen decisiones antes de actuar por mí mismo </p>
-                    <select name="item24" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>25. Evalúo minuciosamente la información y las emociones de una situación antes de tomar una elección </p>
-                    <select name="item25" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>26. Elijo cursos de acción basados únicamente en impulsos del momento sin examinar los datos disponibles </p>
-                    <select name="item26" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>27. Asumo con madurez las consecuencias personales y colectivas de las decisiones que decido adoptar </p>
-                    <select name="item27" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>28. Trato de responsabilizar a factores externos o a terceros cuando los resultados de mis elecciones fallan </p>
-                    <select name="item28" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>29. Genero alternativas novedosas y creativas para afrontar las situaciones complejas desde miradas distintas </p>
-                    <select name="item29" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-
-                    <p>30. Recurro siempre a los mismos métodos tradicionales evitando buscar ideas originales para resolver problemas </p>
-                    <select name="item30" required><option value="">Selecciona...</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-                </div>
-
-                <button type="submit">Enviar Respuestas</button>
-            </form>
-            <div id="resultado-hse" class="oculto"></div>
-        </section>
-
-        <hr>
-
-        <section id="seccion-emociones">
-            <h2>Sección 2: ¿Cómo me siento hoy?</h2>
-            <label for="selector-emocion">Elige la emoción predominante en este momento:</label>
-            <select id="selector-emocion">
-                <option value="">Selecciona...</option>
-                <option value="felicidad">Feliz</option>
-                <option value="furia">Furioso/a</option>
-                <option value="tristeza">Triste</option>
-                <option value="asco">Asqueado/a</option>
-                <option value="sorpresa">Sorprendido/a</option>
-            </select>
-            <button onclick="mostrarTecnica()">Identificar y Regular</button>
-
-            <div id="tecnica-regulacion" class="oculto">
-                <h3 id="titulo-tecnica"></h3>
-                <p id="texto-tecnica"></p>
-                
-                <div id="animacion-respiracion" class="oculto">
-                    <div class="circulo-respirar"></div>
-                    <p style="text-align: center;"><strong>Sigue la animación:</strong> Inhala mientras se expande (4s), mantén el aire (4s) y exhala mientras se encoge (8s).</p>
-                </div>
-            </div>
-        </section>
+        <button class="btn-principal btn-menu" onclick="navegar('pantalla-hse')">
+            <span style="font-size: 24px; display: block; margin-bottom: 5px;">📊</span>
+            1. Evaluar mis Habilidades Socioemocionales
+        </button>
+        <button class="btn-principal btn-menu" onclick="navegar('pantalla-emociones')" style="background-color: var(--pastel-amarillo); border-color: #f6d365;">
+            <span style="font-size: 24px; display: block; margin-bottom: 5px;">❤️</span>
+            2. ¿Cómo me siento hoy?
+        </button>
     </div>
-    <script src="script.js"></script>
+
+    <div id="pantalla-hse" class="pantalla">
+        <h1>Sección 1</h1>
+        <h2>Evaluación Socioemocional</h2>
+        <p style="font-size: 12px; text-align: justify;"><em>Lee detenidamente cada afirmación y selecciona la opción que mejor describa tu comportamiento. No hay respuestas correctas o incorrectas.</em></p>
+        
+        <form id="formulario-hse" style="width: 100%;">
+            
+            <div class="grupo-form" style="background-color: var(--pastel-amarillo); border: 2px solid #f6d365;">
+                <label style="display: flex; align-items: center; gap: 10px; font-size: 12px; cursor: pointer;">
+                    <input type="checkbox" name="acepto" value="Acepto" required style="width: 20px; height: 20px;"> 
+                    Acepto participar en esta evaluación y autorizo el uso de mis respuestas con fines educativos y de convivencia escolar.
+                </label>
+            </div>
+
+            <div class="grupo-form">
+                <label>Datos Sociodemográficos y Laborales</label>
+                <select name="genero" required><option value="">Género...</option><option value="Femenino">Femenino</option><option value="Masculino">Masculino</option><option value="No binario">No binario</option><option value="Prefiero no decirlo">Prefiero no decirlo</option></select>
+                <select name="sexo" required><option value="">Sexo...</option><option value="Femenino">Femenino</option><option value="Masculino">Masculino</option><option value="Intersexual">Intersexual</option></select>
+                <input type="number" name="edad" min="10" max="99" placeholder="Edad (en números)" required>
+                <select name="sede" required><option value="">Sede del Colegio...</option><option value="Sede A">Sede A</option><option value="Sede B">Sede B</option><option value="Sede C">Sede C</option></select>
+                <select name="jornada" required><option value="">Jornada escolar...</option><option value="Mañana">Mañana</option><option value="Tarde">Tarde</option><option value="Única">Única</option><option value="Nocturna">Nocturna</option></select>
+                <select name="nivel_educativo" required><option value="">Nivel educativo principal...</option><option value="Preescolar">Preescolar</option><option value="Primaria">Primaria</option><option value="Secundaria">Secundaria</option><option value="Media">Media</option></select>
+                <select name="area_desempeno" required><option value="">Área de desempeño...</option><option value="Matemáticas">Matemáticas</option><option value="Humanidades y Lengua Castellana">Humanidades y Lengua Castellana</option><option value="Idiomas Extranjeros">Idiomas Extranjeros</option><option value="Ciencias Naturales">Ciencias Naturales</option><option value="Ciencias Sociales">Ciencias Sociales</option><option value="Educación Física">Educación Física</option><option value="Educación Artística">Educación Artística</option><option value="Tecnología e Informática">Tecnología e Informática</option><option value="Ética y Valores">Ética y Valores</option><option value="Religión">Religión</option><option value="Filosofía">Filosofía</option><option value="Otra">Otra área</option></select>
+            </div>
+
+            <div id="contenedor-items-hse"></div>
+
+            <button type="submit" class="btn-principal" id="btn-enviar-hse">Enviar y Ver Resultados</button>
+            <button type="button" class="btn-principal btn-secundario" onclick="navegar('pantalla-inicio')">Cancelar</button>
+        </form>
+    </div>
+
+    <div id="pantalla-resultados-hse" class="pantalla">
+        <h1>Tu Perfil HSE</h1>
+        <p style="font-size: 12px;" id="mensaje-exito"></p>
+        <div id="contenido-resultados" style="width: 100%; text-align: left; flex-grow: 1; overflow-y: auto;"></div>
+        <button class="btn-principal btn-secundario" onclick="navegar('pantalla-inicio')" style="margin-top: 10px;">Volver al Menú</button>
+    </div>
+
+    <div id="pantalla-emociones" class="pantalla">
+        <h1>Sección 2</h1>
+        <h2>¿Cómo me siento hoy?</h2>
+        <p>Selecciona la emoción predominante en este momento:</p>
+        <div class="grid-emociones">
+            <button class="btn-señal felicidad" onclick="mostrarTecnica('felicidad')"><span class="emoji-grande">😊</span> Felicidad</button>
+            <button class="btn-señal furia" onclick="mostrarTecnica('furia')"><span class="emoji-grande">😡</span> Furia</button>
+            <button class="btn-señal tristeza" onclick="mostrarTecnica('tristeza')"><span class="emoji-grande">💧</span> Tristeza</button>
+            <button class="btn-señal asco" onclick="mostrarTecnica('asco')"><span class="emoji-grande">🤢</span> Asco</button>
+            <button class="btn-señal sorpresa" onclick="mostrarTecnica('sorpresa')"><span class="emoji-grande">😲</span> Sorpresa</button>
+        </div>
+        <button class="btn-principal btn-secundario" onclick="navegar('pantalla-inicio')" style="margin-top: auto;">Volver al Menú</button>
+    </div>
+
+    <div id="pantalla-tecnica" class="pantalla">
+        <h1 id="titulo-emocion">Emoción</h1>
+        <div class="tarjeta">
+            <strong>Propósito:</strong> <span id="proposito-emocion"></span><br><br>
+            <strong>En el cuerpo:</strong> <span id="cuerpo-emocion"></span><br><br>
+            <strong>En la mente:</strong> <span id="mente-emocion"></span>
+        </div>
+        <div class="tarjeta" id="contenedor-herramienta" style="background-color: var(--pastel-verde);">
+            <h3 style="margin-top: 0; color: #2c3e50;">Herramienta Sugerida</h3>
+            <p id="texto-herramienta" style="font-weight: 600; font-size: 13px; color: #2c3e50;"></p>
+            <div id="animacion-respiracion" style="display: none;">
+                <div class="caja-respiracion"></div>
+                <p style="font-size: 12px; margin-top: 10px; text-align: center; color: #2c3e50;">Inhala (4s) - Mantén (4s) - Exhala (8s)</p>
+            </div>
+        </div>
+        <button class="btn-principal btn-secundario" onclick="navegar('pantalla-emociones')" style="margin-top: auto;">Cambiar Emoción</button>
+    </div>
+
+</div>
+
+<script>
+    // === REEMPLAZA AQUÍ LA URL DE TU APPS SCRIPT NUEVO ===
+    const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbw19jf4QpPq58ayfN03ZEwdyW3mzBuU8yur2X2MBbtB-Hcj33fV6k2Htl4VTjWmO0xHuQ/exec";
+
+    function navegar(id) {
+        document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+        document.getElementById(id).classList.add('activa');
+    }
+
+    // --- GENERAR LOS 30 ÍTEMS ---
+    const preguntasHSE = [
+        "1. Identifico con claridad las emociones que estoy sintiendo cuando afronto un momento difícil", "2. Me cuesta mucho trabajo notar qué tipo de emoción están experimentando las personas a mi alrededor", "3. Asumo mis propios errores con respeto y reconozco de forma realista cuáles son mis fortalezas cotidianas", "4. Siento un fuerte rechazo hacia mis propias conductas cuando no logro los resultados ideales", "5. Confío plenamente en mis capacidades personales para lograr las metas y retos que me propongo", "6. Siento que soy incapaz de regular mis estados de ánimo cuando las circunstancias se vuelven estresantes", "7. Me pongo con facilidad en el lugar de otras personas para comprender sus pensamientos y emociones", "8. Me cuesta mucho entender las acciones de los demás cuando sus opiniones difieren de la mía.", "9. Expreso un interés genuino y sincero por el bienestar emocional de las personas con quienes interactúo", "10. Mantengo una distancia emocional que me impide establecer vínculos basados en la escucha atenta", "11. Realizo acciones conscientes orientadas a proteger y asegurar el bienestar general de mis compañeros", "12. Suelo desentenderme de las necesidades de apoyo afectivo de las personas más cercanas a mí.", "13. Escucho con atención plena y sin interrumpir a la otra persona cuando expresa un punto de vista.", "14. Tiendo a formular mis respuestas mentalmente en lugar de prestar atención a lo que el otro dice", "15. Expreso mis posturas y necesidades de forma clara y respetuosa sin vulnerar a quienes me rodean", "16. Manifiesto mis ideas de forma hiriente o agresiva cuando alguien contradice mis opiniones personales", "17. Busco acuerdos mediante el diálogo colaborativo intentando que todas las partes satisfagan sus necesidades", "18. Intento imponer mis propios intereses en una discusión sin ceder espacio para soluciones conjuntas", "19. Interactúo de manera consciente con mi contexto social valorando las diversas realidades culturales del medio", "20. Ignoro las características y necesidades del contexto comunitario al momento de planear mis acciones.", "21. Colaboro activamente en redes de apoyo mutuo reconociendo mi interdependencia con las demás personas", "22. Actúo de manera completamente aislada sin integrarme en los esfuerzos de cooperación de mi grupo", "23. Tomo la iniciativa de forma autónoma y responsable para resolver los problemas cotidianos que afronto.", "24. Espero a que otras personas generen soluciones o tomen decisiones antes de actuar por mí mismo.", "25. Evalúo minuciosamente la información y las emociones de una situación antes de tomar una elección", "26. Elijo cursos de acción basados únicamente en impulsos del momento sin examinar los datos disponibles", "27. Asumo con madurez las consecuencias personales y colectivas de las decisiones que decido adoptar.", "28. Trato de responsabilizar a factores externos o a terceros cuando los resultados de mis elecciones fallan", "29. Genero alternativas novedosas y creativas para afrontar las situaciones complejas desde miradas distintas", "30. Recurro siempre a los mismos métodos tradicionales evitando buscar ideas originales para resolver problemas"
+    ];
+
+    const contenedorItems = document.getElementById("contenedor-items-hse");
+    preguntasHSE.forEach((pregunta, index) => {
+        let n = index + 1;
+        contenedorItems.innerHTML += `
+            <div class="grupo-form">
+                <p class="item-pregunta">${pregunta}</p>
+                <select name="item${n}" required>
+                    <option value="">Selecciona (1 a 5)...</option><option value="1">1 - Nunca</option><option value="2">2 - Casi nunca</option><option value="3">3 - A veces</option><option value="4">4 - Frecuentemente</option><option value="5">5 - Siempre</option>
+                </select>
+            </div>`;
+    });
+
+    // --- BASE DE DATOS DE RETROALIMENTACIÓN HSE ---
+    const retroalimentacionHSE = {
+        "Autoconciencia": {
+            color: "#3498db",
+            bajo: "Presentas desafíos para identificar y nombrar tus emociones en momentos críticos. Se sugiere iniciar un proceso de introspección.",
+            medio: "Posees una capacidad operativa para reconocer emociones y fortalezas en entornos seguros, aunque puedes desbordarte bajo presión.",
+            alto: "Demuestras un uso maduro. Reconoces con claridad tus emociones y gestionas tus estados de ánimo proyectando una imagen segura."
+        },
+        "Empatía": {
+            color: "#e74c3c",
+            bajo: "Muestras desafíos significativos para ponerte en el lugar del otro. Tendencia a centrarte en tu propia perspectiva.",
+            medio: "Eres capaz de comprender emociones ajenas, pero en situaciones de conflicto tu respuesta puede tornarse reactiva.",
+            alto: "Posees una notable capacidad para la toma de perspectiva y actúas de forma proactiva para proteger el bienestar de otros."
+        },
+        "Manejo de Conflictos": {
+            color: "#f39c12",
+            bajo: "Percibes el conflicto como una barrera. Existe dificultad para mantener escucha activa, derivando en evitación del diálogo.",
+            medio: "Conoces herramientas de comunicación asertiva, pero bajo presión puedes tender a imponer tus puntos de vista.",
+            alto: "Abordas los conflictos como oportunidades de crecimiento constructivo, utilizando la negociación colaborativa y el respeto."
+        },
+        "Agencia": {
+            color: "#9b59b6",
+            bajo: "Presentas una actitud pasiva frente a tu desarrollo. Tiendes a esperar directrices y aislarte de los esfuerzos del grupo.",
+            medio: "Reconoces tu entorno y colaboras cuando te sientes integrado. Tu proactividad es fluctuante según la autonomía permitida.",
+            alto: "Actúas con alta iniciativa y responsabilidad. Promueves redes de apoyo mutuo contribuyendo al desarrollo de tu comunidad."
+        },
+        "Toma de Decisiones": {
+            color: "#2ecc71",
+            bajo: "Tus decisiones suelen ser reactivas, basadas en impulsos momentáneos y con tendencia a responsabilizar a factores externos.",
+            medio: "Evalúas información básica, aunque en crisis recurres a soluciones convencionales por seguridad. Asumes las consecuencias con madurez.",
+            alto: "Toma decisiones fundamentadas mediante un pensamiento crítico. Anticipas consecuencias asumiendo total responsabilidad."
+        }
+    };
+
+    // --- PROCESAR FORMULARIO Y ENVIAR ---
+    document.getElementById("formulario-hse").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const btn = document.getElementById("btn-enviar-hse");
+        btn.innerText = "Procesando y Guardando..."; btn.disabled = true;
+
+        const formData = new FormData(this);
+        const itemsInversos = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30];
+        let valores = [];
+
+        for (let i = 1; i <= 30; i++) {
+            let val = parseInt(formData.get("item" + i));
+            if (itemsInversos.includes(i)) {
+                if (val === 1) val = 5; else if (val === 2) val = 4; else if (val === 4) val = 2; else if (val === 5) val = 1;
+            }
+            valores.push(val); // Índice 0 es item 1
+        }
+
+        const puntajes = {
+            "Autoconciencia": valores.slice(0, 6).reduce((a, b) => a + b, 0),
+            "Empatía": valores.slice(6, 12).reduce((a, b) => a + b, 0),
+            "Manejo de Conflictos": valores.slice(12, 18).reduce((a, b) => a + b, 0),
+            "Agencia": valores.slice(18, 24).reduce((a, b) => a + b, 0),
+            "Toma de Decisiones": valores.slice(24, 30).reduce((a, b) => a + b, 0)
+        };
+
+        let htmlResultados = "";
+        for (const [habilidad, puntos] of Object.entries(puntajes)) {
+            let nivel = puntos >= 23 ? "alto" : (puntos >= 15 ? "medio" : "bajo");
+            let texto = retroalimentacionHSE[habilidad][nivel];
+            let color = retroalimentacionHSE[habilidad].color;
+            let nivelTexto = nivel.charAt(0).toUpperCase() + nivel.slice(1);
+            
+            htmlResultados += `
+                <div class="tarjeta tarjeta-resultado" style="border-color: ${color};">
+                    <strong style="color: ${color}; font-size: 15px;">${habilidad}: ${puntos}/30 pts (Nivel ${nivelTexto})</strong><br><br>${texto}
+                </div>`;
+        }
+
+        // Enviar a Google Sheets
+        fetch(URL_GOOGLE_SHEETS, { method: "POST", mode: "no-cors", body: formData })
+        .then(() => {
+            document.getElementById("contenido-resultados").innerHTML = htmlResultados;
+            document.getElementById("mensaje-exito").innerHTML = '<span style="color:green; font-weight:bold;">✓ Tus respuestas se guardaron exitosamente en la base de datos.</span>';
+            btn.innerText = "Enviar y Ver Resultados"; btn.disabled = false;
+            navegar('pantalla-resultados-hse');
+            this.reset();
+        }).catch(err => {
+            alert("Error de conexión. Revisa tu internet e intenta de nuevo.");
+            btn.innerText = "Enviar y Ver Resultados"; btn.disabled = false;
+        });
+    });
+
+    // --- SECCIÓN 2: DATOS DE EMOCIONES ---
+    const datosEmociones = {
+        "felicidad": {
+            titulo: "Felicidad",
+            proposito: "Ayudarnos a conectar con los demás, disfrutar experiencias agradables y fortalecer aquello que nos hace bien.",
+            cuerpo: "Energía, relajación muscular, sonrisas espontáneas y ganas de moverse.",
+            mente: "Pensamientos positivos, tranquilidad, motivación y gratitud.",
+            herramienta: "Técnica: Expresar lo que siento. Escribe o dile a alguien cercano qué te hizo sentir tan bien hoy.",
+            animacion: false
+        },
+        "furia": {
+            titulo: "Furia / Enojo",
+            proposito: "Protegernos, defender nuestros límites y reaccionar ante situaciones injustas o amenazantes.",
+            cuerpo: "Tensión muscular, respiración rápida, aumento del ritmo cardíaco y calor.",
+            mente: "Pensamientos acelerados, irritabilidad, deseos de confrontar.",
+            herramienta: "Técnica: Respiración 4-4-8. Sigue el circuito visual abajo para desacelerar tu ritmo cardíaco y recuperar el control.",
+            animacion: true
+        },
+        "tristeza": {
+            titulo: "Tristeza",
+            proposito: "Procesar pérdidas, decepciones o situaciones dolorosas, permitiéndonos reflexionar y buscar apoyo.",
+            cuerpo: "Cansancio, llanto, pesadez, falta de energía o nudo en la garganta.",
+            mente: "Pensamientos de nostalgia, desánimo y necesidad de estar solos.",
+            herramienta: "Técnica: Pausa corporal. Cambia de espacio, estírate suavemente y busca tu red de apoyo (amigos o familiares).",
+            animacion: false
+        },
+        "asco": {
+            titulo: "Asco",
+            proposito: "Protegernos de aquello que percibimos como desagradable, peligroso o dañino.",
+            cuerpo: "Náuseas, rechazo, tensión facial o ganas de alejarnos rápidamente.",
+            mente: "Incomodidad, desaprobación o necesidad de evitar a ciertas personas/situaciones.",
+            herramienta: "Técnica: Pensamiento consciente. Pregúntate: ¿Qué necesito evitar ahora mismo para sentirme a salvo?",
+            animacion: false
+        },
+        "sorpresa": {
+            titulo: "Sorpresa",
+            proposito: "Prepararnos para reaccionar rápidamente ante algo inesperado y adaptarnos a nuevas situaciones.",
+            cuerpo: "Sobresalto, aumento de atención, ojos abiertos e inmovilidad momentánea.",
+            mente: "Curiosidad, alerta o necesidad de comprender lo que acaba de ocurrir.",
+            herramienta: "Técnica: Anclaje 5-4-3-2-1. Enumera mentalmente los 5 últimos objetos que viste para evacuar la sobrecarga mental.",
+            animacion: false
+        }
+    };
+
+    function mostrarTecnica(emocion) {
+        const data = datosEmociones[emocion];
+        document.getElementById("titulo-emocion").innerText = data.titulo;
+        document.getElementById("proposito-emocion").innerText = data.proposito;
+        document.getElementById("cuerpo-emocion").innerText = data.cuerpo;
+        document.getElementById("mente-emocion").innerText = data.mente;
+        document.getElementById("texto-herramienta").innerText = data.herramienta;
+        
+        document.getElementById("animacion-respiracion").style.display = data.animacion ? "block" : "none";
+        navegar('pantalla-tecnica');
+    }
+</script>
 </body>
 </html>
